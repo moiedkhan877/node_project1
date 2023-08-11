@@ -4,6 +4,8 @@ const userModel = require("../models/userModel");
 
 const passport = require("passport");
 const LocalStartegy = require("passport-local");
+const { sendmail } = require("../utils/mail");
+
 
 passport.use(new LocalStartegy(userModel.authenticate()));
 
@@ -60,7 +62,7 @@ router.get("/signout", isLoggedIn, async function (req, res, next) {
   });
 });
 
-router.get("/reset/:id", async function (req, res, next) {
+router.get("/reset/:id", isLoggedIn, async function (req, res, next) {
   res.render("reset", {
       title: "Reset Password",
       id: req.params.id,
@@ -68,22 +70,64 @@ router.get("/reset/:id", async function (req, res, next) {
   });
 });
 
-router.post("/reset/:id", async function (req, res, next) {
-  try {
-      const { oldpassword, password } = req.body;
-      const user = await UserModel.findById(req.params.id);
 
-      if (oldpassword !== user.password) {
-          return res.send(
-              `Incorrect Password. <a href="/reset/${user._id}">Reset Again</a>`
-          );
-      }
-      await UserModel.findByIdAndUpdate(req.params.id, req.body);
+
+router.post("/reset/:id", isLoggedIn, async function (req, res, next) {
+  try {
+      await req.user.changePassword(req.body.oldpassword, req.body.password);
+      await req.user.save();
       res.redirect("/profile");
   } catch (error) {
       res.send(error);
   }
 });
+
+router.get("/getemail", function (req, res, next) {
+  res.render("getemail", { title: "Forget-Password", user: req.user });
+});
+
+router.post("/getemail", async function (req, res, next) {
+  try {
+      const user = await userModel.findOne({ email: req.body.email });
+
+      if (user === null) {
+          return res.send(
+              `User not found. <a href="/get-email">Forget Password</a>`
+          );
+      }
+      sendmail(req, res, user);
+  } catch (error) {
+      res.send(error);
+  }
+});
+
+router.get("/changepassword/:id", function (req, res, next) {
+  res.render("changepassword", {
+      title: "Change Password",
+      id: req.params.id,
+      user: null,
+  });
+});
+
+router.post("/changepassword/:id", async function (req, res, next) {
+  try {
+      const user = await userModel.findById(req.params.id);
+      if (user.passwordResetToken === 1) {
+          await user.setPassword(req.body.password);
+          user.passwordResetToken = 0;
+      } else {
+          res.send(
+              `link expired try again <a href="/get-email">Forget Password</a>`
+          );
+      }
+      await user.save();
+
+      res.redirect("/signin");
+  } catch (error) {
+      res.send(error);
+  }
+});
+
 
 
 function isLoggedIn(req, res, next) {

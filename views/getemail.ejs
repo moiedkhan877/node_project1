@@ -1,0 +1,22 @@
+<div class="email">
+    <%- include('partials/header')%>
+<!--  -->
+<%- include('partials/nav')%>
+<form class="m-auto w-25 mt-5" action="/getemail" method="post">
+    <h1 class="mb-4">Enter Existing Email</h1>
+    <input
+        class="form-control mb-3"
+        type="email"
+        placeholder="johndoe@gmail.com"
+        name="email"
+    />
+
+    <button class="btn btn-primary mb-3">send email</button>
+    <p><a class="btn btn-danger"  href="/signup">sign up | sign in</a></p>
+
+
+
+</form>
+</div>
+
+    
