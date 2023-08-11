@@ -1,0 +1,21 @@
+<div class="signin-page">
+    <%- include('partials/header')%>
+<%- include('partials/nav')%>
+
+<form class="m-auto w-25 mt-5" action="/signin" method="post">
+<h1>Sign-In</h1>
+    <input class="form-control mb-3" type="text" placeholder="enter username" name="username" >
+    <input class="form-control mb-3" type="password" placeholder="***********" name="password">
+    <p class="text-end">
+        <a class="text-dark" href="/getemail">Forget Password ?</a>
+    </p>
+    <button class="btn btn-danger w-25">Sign In</button>
+    <p class="text-dark mt-2">Dont't have an account ? <a class="text-dark" href="/signup">signup</a></p>
+</form></form>
+
+
+</form>
+
+
+<%- include('partials/footer.ejs')%>
+</div>
