@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const userModel = require("../models/userModel");
+const fs = require("fs");
+const upload = require("../utils/multer");
 
 const passport = require("passport");
 const LocalStartegy = require("passport-local");
@@ -25,12 +27,12 @@ router.post("/signup", async function (req, res, next) {
 
       const newuser = new userModel({ username, email });
 
-      const user = await userModel.register(newuser, password);
+      const user = await userModel.register({ username, email }, password);
 
       // await newuser.save();
       res.redirect("/signin");
   } catch (error) {
-      res.send(error);
+      res.send(error.message);
   }
 });
 
@@ -41,20 +43,60 @@ router.get("/signin", function (req, res, next) {
 router.post("/signin",
   passport.authenticate("local", {
       failureRedirect: "/signin",
-      successRedirect: "/profile",
+      successRedirect: "/home",
   }),
   function (req, res, next) {}
 );
 
-router.get("/profile", isLoggedIn, async function (req, res, next) {
+router.get("/home", isLoggedIn, async function (req, res, next) {
   try {
       console.log(req.user);
       const users = await userModel.find();
-      res.render("profile", { title: "Profile", users, user: req.user });
+      res.render("home", { title: "Homepage", users, user: req.user });
   } catch (error) {
       res.send(error);
   }
 });
+
+router.get("/profile", isLoggedIn, async function (req, res, next) {
+  try {
+      res.render("profile", { title: "Profile", user: req.user });
+  } catch (error) {
+      res.send(error);
+  }
+});
+
+// router.post(
+//   "/avatar",
+//   upload.single("avatar"),
+//   isLoggedIn,
+//   async function (req, res, next) {
+//       try {
+//           console.log(req.file.filename);
+//           res.redirect("/profile");
+//       } catch (error) {
+//           res.send(error);
+//       }
+//   }
+// );
+
+router.post(
+    "/avatar",
+    upload.single("avatar"),
+    isLoggedIn,
+    async function (req, res, next) {
+        try {
+            if (req.user.avatar !== "default.jpg") {
+                fs.unlinkSync("./public/images/" + req.user.avatar);
+            }
+            req.user.avatar = req.file.filename;
+            req.user.save();
+            res.redirect("/profile");
+        } catch (error) {
+            res.send(error);
+        }
+    }
+);
 
 router.get("/signout", isLoggedIn, async function (req, res, next) {
   req.logout(() => {

@@ -27,6 +27,12 @@ const userModel = new mongoose.Schema({
             "Invalid email address",
         ],
     },
+
+    avatar: {
+        type: String,
+        default: "default.jpg",
+    },
+
 });
 userModel.plugin(plm);
 const user = mongoose.model("user", userModel)

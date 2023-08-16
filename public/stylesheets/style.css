@@ -14,11 +14,16 @@ nav{
   justify-content: space-between;
   align-items: center;
   padding: 1vmax 2vmax;
+  z-index: 999;
 }
 
 nav h1 img{
   width: 10%;
   height: 5%;
+}
+
+nav h1{
+  font-size: 2vmax;
 }
 
 nav ul{
@@ -28,20 +33,165 @@ list-style-type: none;
 }
 
 nav ul li a{
+  font-size: 1vmax;
   text-decoration: none;
 }
+
 
 .page1{
   width: 100%;
   height: 100%;
-background-image: url(https://images.unsplash.com/photo-1691156568477-7188f31e6f4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80);
-background-position: center;
+background-image: url(https://images.unsplash.com/photo-1641337221253-fdc7237f6b61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80);
 background-size: cover;
+background-position: center;
 object-fit: cover;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.overlay{
+  position: fixed; /* Sit on top of the page content */
+  /* display: none; Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer;
+}
+
+.page1 h2 span{
+  color: #F5562F;
+}
+
+.page1 h2{
+  font-size: 5vmax;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+  text-align: center;
+  align-items: center;
+  margin-top: 15vmax;
+}
+
+.page1 p{
+  font-size: 1.5vmax;
+  text-align: center;
+  color: white;
+}
+
+button{
+background-color: #F5562F;
+color: wheat;
+padding: 0.5vmax 1vmax;
+text-align: center;
+margin-top: 5vmax;
+}
+
+.page2{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #171717;
+}
+
+.aboutpic{
+  width: 40%;
+  height: 90%;
+  background-color: seagreen;
+  background-image: url(https://imgs.search.brave.com/tx3buRLK-1gGZzEx2V62L0_2y9-uh5izG7BxiYa9ecU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDI3NTA2/MzEuanBn);
+  background-size: cover;
+  /* background-position: center; */
+  object-fit: cover;
+
+}
+
+.about{
+  width: 40%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* background-color: seagreen; */
+}
+
+.about span{
+font-size: 1vmax;
+ color: #F5562F;
+}
+
+.about h1{
+  font-size: 3vmax;
+  font-weight: 800;
+  color: wheat;
+}
+
+.about p{
+  color: white;
+  margin-top: -4vmax;
+}
+
+.about h3{
+  color: white;
+}
+
+.about h2 button{
+  margin-top: -4vmax;
 }
 
 .signup-page{
-width: 100%;
-height: 100%;
-align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.forms{
+  width: 40%;
+  height: 70%;
+  /* background-color: blue; */
+}
+
+.forms form{
+  width: 50%;
+  height: 80%;
+  background-image: url(https://images.unsplash.com/photo-1577221084712-45b0445d2b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1898&q=80);
+  background-size: cover;
+  /* border: 3px solid green; */
+  box-shadow: 10px 10px rgb(11, 115, 150);
+}
+
+.signin-page{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.sign-in-form{
+  width: 80%;
+  height: 80%;
+  /* background-color: blue; */
+}
+
+.sign-in-form form{
+  width: 70%;
+  height: 80%;
+  background-image: url(https://images.unsplash.com/photo-1577221084712-45b0445d2b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1898&q=80);
+  background-size: cover;
+  /* border: 3px solid green; */
+  box-shadow: 10px 10px rgb(11, 115, 150);
+}
+
+
+
