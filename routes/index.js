@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const userModel = require("../models/userModel");
+const TodoModel = require("../models/todoModel");
 const fs = require("fs");
+
 const upload = require("../utils/multer");
 
 const passport = require("passport");
@@ -48,11 +50,23 @@ router.post("/signin",
   function (req, res, next) {}
 );
 
+// router.get("/home", isLoggedIn, async function (req, res, next) {
+//   try {
+//       console.log(req.user);
+//       const users = await userModel.find();
+//       res.render("home", { title: "Homepage", users, user: req.user });
+//   } catch (error) {
+//       res.send(error);
+//   }
+// });
+
 router.get("/home", isLoggedIn, async function (req, res, next) {
   try {
       console.log(req.user);
-      const users = await userModel.find();
-      res.render("home", { title: "Homepage", users, user: req.user });
+      // const user = await UserModel.findById(req.user._id).populate("todos");
+      const { todos } = await req.user.populate("todos");
+      console.log(todos);
+      res.render("home", { title: "Homepage", todos, user: req.user });
   } catch (error) {
       res.send(error);
   }
@@ -61,6 +75,7 @@ router.get("/home", isLoggedIn, async function (req, res, next) {
 router.get("/profile", isLoggedIn, async function (req, res, next) {
   try {
       res.render("profile", { title: "Profile", user: req.user });
+      console.log(req.user)
   } catch (error) {
       res.send(error);
   }
@@ -86,11 +101,12 @@ router.post(
     isLoggedIn,
     async function (req, res, next) {
         try {
-            if (req.user.avatar !== "default.jpg") {
-                fs.unlinkSync("./public/images/" + req.user.avatar);
-            }
-            req.user.avatar = req.file.filename;
-            req.user.save();
+          console.log(req.file.filename);
+          if (req.user.avatar !== "default.jpg") {
+            fs.unlinkSync("./public/images/" + req.user.avatar);
+        }
+        req.user.avatar = req.file.filename;
+        req.user.save();
             res.redirect("/profile");
         } catch (error) {
             res.send(error);
@@ -179,6 +195,27 @@ function isLoggedIn(req, res, next) {
   res.redirect("/signin");
 }
 
+// -------------------------------------------------create-todo-------------------------------
+
+router.get("/createtodo", isLoggedIn, async function (req, res, next) {
+  res.render("createtodo", {
+      title: "Create Todo",
+      user: req.user,
+  });
+});
+
+router.post("/createtodo", isLoggedIn, async function (req, res, next) {
+  try {
+      const todo = new TodoModel(req.body);
+      todo.user = req.user._id;
+      req.user.todos.push(todo._id);
+      await todo.save();
+      await req.user.save();
+      res.redirect("/home");
+  } catch (error) {
+      res.send(error);
+  }
+});
 
 
 module.exports = router;
