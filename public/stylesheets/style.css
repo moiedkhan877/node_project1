@@ -111,7 +111,6 @@ margin-top: 5vmax;
   box-shadow: 5px 5px 2px 3px #F5562F;
   /* background-position: center; */
   object-fit: cover;
-
 }
 
 .about{
@@ -144,30 +143,37 @@ font-size: 1vmax;
 }
 
 .about h2 button{
-  margin-top: -4vmax;
+  margin-top: -2vmax;
 }
 
 .signup-page{
   width: 100%;
   height: 100%;
   display: flex;
+  background-image: url(https://images.unsplash.com/photo-1535743686920-55e4145369b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80);
+  background-position: center;
   flex-direction: column;
   align-items: center;
 }
 
 .forms{
-  width: 40%;
-  height: 70%;
-  /* background-color: blue; */
+  width: 25%;
+  height: 55%;
+  margin-top: 5vmax;
+  backdrop-filter: blur(20px);
+background: transparent;
+border: 1px solid white;
 }
 
 .forms form{
-  width: 50%;
-  height: 80%;
-  background-image: url(https://images.unsplash.com/photo-1577221084712-45b0445d2b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1898&q=80);
-  background-size: cover;
+  width: 80%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   /* border: 3px solid green; */
-  box-shadow: 10px 10px rgb(11, 115, 150);
+  /* box-shadow: 10px 10px rgb(11, 115, 150); */
 }
 
 .signin-page{
@@ -176,22 +182,30 @@ font-size: 1vmax;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url(https://images.unsplash.com/photo-1535743686920-55e4145369b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80);
+  background-position: center;
+  
 }
 
 
 .sign-in-form{
-  width: 80%;
-  height: 80%;
+  width: 25%;
+  height: 55%;
+  margin-top: 5vmax;
+background: transparent;
+backdrop-filter: blur(20px);
+border: 1px solid white;
+padding: 30px 40px;
   /* background-color: blue; */
 }
 
 .sign-in-form form{
-  width: 70%;
-  height: 80%;
-  background-image: url(https://images.unsplash.com/photo-1577221084712-45b0445d2b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1898&q=80);
-  background-size: cover;
-  /* border: 3px solid green; */
-  box-shadow: 10px 10px rgb(11, 115, 150);
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .page3{
@@ -229,12 +243,120 @@ align-items: center;
 .cards{
   width: 17%;
 height: 70%;
+box-shadow: 10px 15px 20px green;
 border-radius: 1vmax;
 background-color: green;
 }
 
 .cards img{
   border-radius: 1vmax;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* -----------------page4 end----------------- */
+
+.page5{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* background-color: saddlebrown; */
+}
+
+.headings{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headings h1{
+  font-size: 5vmax;
+  font-weight: 400;
+}
+
+.headings p{
+  font-size: 1.5vmax;
+}
+
+.storiyaan{
+width: 100%;
+height: 60%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.story{
+  width: 15%;
+  height: 90%;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 10px 15px 20px green;
+  background-color: steelblue;
+ 
+}
+
+.story img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------page5 end------------------------------------ */
+
+.page6{
+  width: 100%;
+  height: 150%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: slateblue; */
+}
+
+.gallery{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: sandybrown; */
+}
+
+.gallery h1{
+  font-size: 3.5vmax;
+  font-weight: 400;
+}
+
+.gallery p{
+  font-size: 1.5vmax;
+}
+
+.gallery-pic{
+width: 100%;
+height: 72%;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+/* background-color: darkgoldenrod; */
+}
+
+.wraps{
+width: 16%;
+height: 48%;
+border-radius: 5px;
+border: 1px solid black;
+/* background-color: chartreuse; */
+}
+
+.wraps img{
   width: 100%;
   height: 100%;
   object-fit: cover;

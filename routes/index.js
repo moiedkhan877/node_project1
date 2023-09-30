@@ -193,8 +193,7 @@ function isLoggedIn(req, res, next) {
       return next();
   }
   res.redirect("/signin");
-}
-
+} 
 // -------------------------------------------------create-todo-------------------------------
 
 router.get("/createtodo", isLoggedIn, async function (req, res, next) {
